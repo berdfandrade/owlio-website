@@ -1,10 +1,13 @@
-# Gera o site com o Vite e publica no GitHub Pages a cada push na main.
+# Gera o site com o Vite e publica no GitHub Pages a cada push na main e uma vez por dia,
+# para o botão de download pegar a versão mais nova do Owlio mesmo sem push aqui.
 name: Deploy
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * *"
 
 permissions:
   contents: read
@@ -25,6 +28,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Link of the latest Windows installer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Sem release com instalador, fica o link do .env (a página de releases).
+          url=$(gh api repos/berdfandrade/owlio/releases/latest \
+            --jq '[.assets[] | select(.name | test("^Owlio-Setup-.*\\.exe$"))][0].browser_download_url // empty' || true)
+          if [ -n "$url" ]; then echo "VITE_DOWNLOAD_URL=$url" >> "$GITHUB_ENV"; fi
+          echo "Download link: ${url:-from .env}"
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

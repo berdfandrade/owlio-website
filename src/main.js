@@ -28,3 +28,17 @@ if (card && !reduced) {
     text.replaceChildren(before, b(who), mid, b(next, true));
   }, 3200);
 }
+
+// "Baixar para Windows" vai direto para o instalador da versão mais recente no GitHub.
+// O link do build (VITE_DOWNLOAD_URL) já vem resolvido pelo deploy; aqui ele só é atualizado
+// se saiu uma versão nova depois da última publicação do site. Sem rede, fica o link do build.
+fetch('https://api.github.com/repos/berdfandrade/owlio/releases/latest', {
+  headers: { Accept: 'application/vnd.github+json' },
+})
+  .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+  .then((release) => {
+    const exe = release.assets.find((a) => /^Owlio-Setup-.*\.exe$/.test(a.name));
+    if (!exe) return;
+    for (const a of document.querySelectorAll('a[data-download]')) a.href = exe.browser_download_url;
+  })
+  .catch(() => {});

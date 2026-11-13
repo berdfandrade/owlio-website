@@ -12,13 +12,13 @@ npm run build    # gera o site estático em dist/
 
 ## Link de download
 
-O botão "Baixar para Windows" lê o link do arquivo `.env`:
+O botão "Baixar para Windows" aponta direto para o instalador da versão mais recente do Owlio (por exemplo `https://github.com/berdfandrade/owlio/releases/download/v0.1/Owlio-Setup-0.1.exe`), sem precisar editar nada a cada versão:
 
-```
-VITE_DOWNLOAD_URL=https://github.com/berdfandrade/owlio/releases/latest
-```
+- **No deploy**, a Action consulta a última release do `berdfandrade/owlio` e põe o link do `Owlio-Setup-*.exe` nas páginas. Ela roda a cada push e também uma vez por dia.
+- **Ao abrir a página**, o `src/main.js` consulta a API do GitHub de novo e atualiza o botão, caso tenha saído uma versão depois do último deploy.
+- **Sem instalador publicado**, fica o link do `.env` (a página de releases).
 
-Troque pelo link direto do instalador e rode `npm run build` de novo. O link aparece no menu, no topo e no fim das duas páginas.
+O link aparece no menu, no topo e no fim das duas páginas.
 
 ## Onde fica cada coisa
 
