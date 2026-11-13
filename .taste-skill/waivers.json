@@ -1,0 +1,1 @@
+[{ "check": "row-lines", "target": "div.mo-mq__rail", "reason": "the kit's own marquee-row moment (dealt for #estrutura): its rail clips the moving track and its copy by design, so an item is always part-way under the faded edge" }]

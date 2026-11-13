@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pt-BR" data-type="software" data-radius="soft" data-ground="sky" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Owlio: editor de roteiros para cinema e TV</title>
+<meta name="description" content="Escreva roteiros em páginas US Letter com a formatação da indústria, organize as cenas em cartões e exporte um PDF igual ao da tela.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Owlio: editor de roteiros para cinema e TV">
+<meta property="og:description" content="Páginas de roteiro de verdade, cartões de cena, linha do tempo e PDF igual à tela.">
+<meta property="og:image" content="/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png" type="image/png">
+<meta name="theme-color" content="#f7f7f5">
+<!-- <link rel="canonical" href="https://[domínio do Owlio]/"> -->
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..700&family=Figtree:wght@400..600&family=DM+Mono:wght@400;500&family=Courier+Prime&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/system.css">
+<link rel="stylesheet" href="/assets/ui/cards.css">
+<link rel="stylesheet" href="/assets/motion/motion.css">
+<link rel="stylesheet" href="/assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="/assets/layout/layout.css">
+<style>
+:root {
+  --p-bg: #f7f7f5; --p-surface: #ebebe8; --p-ink: #1b1d22; --p-muted: #66676a;
+  --p-accent: #3b6cf6; --p-accent-ink: #ffffff; --p-action: #3b6cf6; --p-action-ink: #ffffff;
+  --p-inv-bg: #1b1d22; --p-inv-surface: #282a2e; --p-inv-ink: #f7f7f5; --p-inv-muted: #9b9c9d;
+  --p-inv-accent: #3b6cf6; --p-inv-accent-ink: #ffffff; --p-inv-action: #3b6cf6; --p-inv-action-ink: #ffffff;
+  --font-display: "Gabarito", system-ui, sans-serif;
+  --font-text: "Figtree", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --ly-scale: 0.98;
+}
+</style>
+<link rel="stylesheet" href="/assets/ui/base.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="/assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="/assets/moments/moments.js">
+<link rel="modulepreload" href="/assets/moments/lib.js">
+<link rel="modulepreload" href="/assets/moments/iris-opens/moment.js">
+<link rel="modulepreload" href="/assets/moments/marquee-row/moment.js">
+<link rel="stylesheet" href="/src/site.css">
+</head>
+<body>
+<!-- type: software
+     deal: hero split, nav nav-centre, close close-word, footer footer-dark, rhythm surface-pairs, buttons arrow,
+     mark: the client's own owl logo (replaces the dealt wordmark), palette: the client's own blue (#3b6cf6, the app's
+     accent) through start.mjs brand in place of card-pastels, type gabarito, ground sky (dealt sage; sky sits with the
+     client's blue)
+     moments: marquee-row in #estrutura (the eight structure templates), iris-opens in #versoes (the inverse ground) -->
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Pular para o conteúdo</a>
+    <a class="nav__logo" href="#top"><img class="logo-owl" src="/owlio-96.png" alt="" width="28" height="28">Owlio</a>
+    <nav class="nav__links" aria-label="Principal">
+      <div class="nav__item"><a class="nav__link" href="#roteiro">Roteiro</a></div>
+      <div class="nav__item"><a class="nav__link" href="#escrita">Escrita</a></div>
+      <div class="nav__item"><a class="nav__link" href="#historia">História</a></div>
+      <div class="nav__item"><a class="nav__link" href="#versoes">Versões</a></div>
+      <div class="nav__item"><a class="nav__link" href="#download">Download</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__link" href="en/" hreflang="en" lang="en">English</a>
+      <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Baixar para Windows</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text grid hero-split">
+        <div class="hero-copy span-5">
+          <p class="hero-notice">Courier 12, margens da indústria, 1 página por minuto de tela</p>
+          <h1 id="hero-h">Editor de roteiros para cinema e TV</h1>
+          <p class="t-lead">Você escreve em páginas US Letter na tela, Enter e Tab escolhem o próximo elemento, e o PDF sai igual ao que você vê.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Baixar para Windows<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+            <a class="btn btn--secondary" href="https://github.com/berdfandrade/owlio">Ver o código no GitHub</a>
+          </div>
+          <dl class="hero-facts">
+            <div><dt>Arquivos</dt><dd>Fountain e Final Draft</dd></div>
+            <div><dt>Idiomas</dt><dd>Português e inglês</dd></div>
+            <div><dt>Sistemas</dt><dd>Windows e Linux</dd></div>
+          </dl>
+        </div>
+        <div class="hero-visual frame frame--photo span-6 start-7 hero-shot">
+          <img class="frame__img" src="/shots/pt/script.webp" alt="O Owlio com um roteiro aberto: a lista de cenas à esquerda e a página em Courier à direita" width="1440" height="900" fetchpriority="high" data-source="client" data-subject="the Owlio script editor">
+          <div class="float-card" aria-hidden="true">
+            <span class="float-card__dot"></span>
+            <span class="float-card__key">Enter</span>
+            <span class="float-card__text">depois de <b>TOMÁS</b> começa o <b data-next>Diálogo</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roteiro" aria-labelledby="roteiro-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 id="roteiro-h" class="span-5">O roteiro em páginas de verdade</h2>
+        <p class="span-6 start-7 muted lead-grey">À esquerda, as cenas com a página e quem fala nelas. À direita, a página em Courier 12, com 1,5 polegada de margem à esquerda e 1 nos outros lados. <a class="link" href="#atalhos">Ver os atalhos</a></p>
+      </div>
+      <div class="frame frame--wide frame--app"><img class="frame__img" src="/shots/pt/script-dark.webp" alt="O Owlio no tema escuro: a lista de cenas e os personagens à esquerda, a página do roteiro à direita" width="1440" height="900" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="section" id="escrita" aria-labelledby="escrita-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head">
+          <h2 id="escrita-h">Formatação de roteiro automática. <span class="muted">O Owlio cuida das margens e dos nomes.</span></h2>
+        </div>
+        <div class="grid">
+          <article class="card card--row card--open span-6">
+            <h3>Escolhe o próximo elemento do roteiro</h3>
+            <p>Enter depois do nome do personagem começa o diálogo. Tab numa linha de ação vazia vira personagem.</p>
+            <div class="panel panel--shot crop--fit"><img class="frame__img" src="/shots/pt/elements.webp" alt="Lista de elementos do Owlio aberta, com Cabeçalho, Ação, Personagem, Parentético, Diálogo e Transição" loading="lazy"></div>
+          </article>
+          <article class="card card--row card--open span-6">
+            <h3>Completa nomes e locais do roteiro</h3>
+            <p>Sugere os personagens que mais falam, os locais já usados e extensões como (V.O.). Aceite com Tab.</p>
+            <div class="panel panel--shot crop--page"><img class="frame__img" src="/shots/pt/autocomplete.webp" alt="Nome de personagem sendo digitado, com o resto do nome sugerido em cinza" loading="lazy"></div>
+          </article>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-6">
+          <h3>Põe 2 falas lado a lado</h3>
+          <p>Quando dois personagens falam ao mesmo tempo, Ctrl+Shift+D monta o diálogo duplo na página.</p>
+          <div class="panel panel--shot crop--page"><img class="frame__img" src="/shots/pt/dual.webp" alt="Diálogo duplo na página: duas falas lado a lado" loading="lazy"></div>
+        </article>
+        <article class="card card--row card--open span-6">
+          <h3>Escreve em português ou inglês</h3>
+          <p>DIA, NOITE e CORTA PARA: ou DAY, NIGHT e CUT TO:, escolhidos à parte do idioma da interface.</p>
+          <div class="panel panel--shot crop--fit"><img class="frame__img" src="/shots/pt/settings.webp" alt="Configurações do roteiro com o idioma das convenções e a fonte das páginas" loading="lazy"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="atalhos" aria-labelledby="atalhos-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="atalhos-h">Atalhos para escrever o roteiro</h2>
+        <p>O roteiro inteiro sem tirar as mãos do teclado.</p>
+      </div>
+      <div class="grid grid--top">
+        <ul class="rows span-5">
+          <li><span class="rows__name">Próximo elemento</span><span class="rows__value"><kbd>Enter</kbd></span></li>
+          <li><span class="rows__name">Troca o tipo de elemento</span><span class="rows__value"><kbd>Tab</kbd></span></li>
+          <li><span class="rows__name">Escolhe o elemento</span><span class="rows__value"><kbd>Ctrl+1</kbd> a <kbd>Ctrl+6</kbd></span></li>
+          <li><span class="rows__name">Diálogo duplo</span><span class="rows__value"><kbd>Ctrl+Shift+D</kbd></span></li>
+          <li><span class="rows__name">Modo foco</span><span class="rows__value"><kbd>Ctrl+Shift+F</kbd></span></li>
+          <li><span class="rows__name">Localizar e substituir</span><span class="rows__value"><kbd>Ctrl+F</kbd></span></li>
+          <li><span class="rows__name">Exportar PDF</span><span class="rows__value"><kbd>Ctrl+Shift+E</kbd></span></li>
+          <li><span class="rows__name">Versões</span><span class="rows__value"><kbd>Ctrl+Shift+H</kbd></span></li>
+        </ul>
+        <div class="span-6 start-7 keys-shot">
+          <div class="shot"><img src="/shots/pt/shortcuts.webp" alt="Janela de atalhos do Owlio com as teclas desenhadas" width="720" height="900" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="historia" aria-labelledby="historia-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5">
+          <div class="section-head">
+            <h2 id="historia-h">O roteiro visto de cima</h2>
+            <p>Cartões, mapa, quadro e personagens leem o mesmo roteiro e mudam junto com ele.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Partes do Owlio">
+            <button class="tab" role="tab" id="t-1" aria-selected="true" aria-controls="tp-1 ts-1">Mover as cenas</button>
+            <button class="tab" role="tab" id="t-2" aria-selected="false" aria-controls="tp-2 ts-2" tabindex="-1">Ligar os personagens</button>
+            <button class="tab" role="tab" id="t-3" aria-selected="false" aria-controls="tp-3 ts-3" tabindex="-1">Juntar as ideias</button>
+            <button class="tab" role="tab" id="t-4" aria-selected="false" aria-controls="tp-4 ts-4" tabindex="-1">Criar os avatares</button>
+          </div>
+          <div class="tab-panels">
+            <div role="tabpanel" id="tp-1" aria-labelledby="t-1"><p>Cada cena vira um cartão com local, horário em cor, página e quem fala. Arraste um cartão e a cena inteira muda de lugar no roteiro.</p></div>
+            <div role="tabpanel" id="tp-2" aria-labelledby="t-2" hidden><p>Arraste de um avatar a outro para ligar dois personagens. Família, amor, conflito ou trabalho, cada um com sua cor e um rótulo seu.</p></div>
+            <div role="tabpanel" id="tp-3" aria-labelledby="t-3" hidden><p>O Beat Board é um quadro sem bordas para ideias: cartões com cor e imagem, linhas de fluxo e zoom à vontade.</p></div>
+            <div role="tabpanel" id="tp-4" aria-labelledby="t-4" hidden><p>Monte um avatar em pixel art para cada personagem: corpo, pele, cabelo, roupa e fundo, com um botão Aleatório.</p></div>
+          </div>
+        </div>
+        <div class="frame frame--split span-6 start-7">
+          <div class="stage stage--fade-br">
+            <div class="at-corner to-edge shot" id="ts-1"><img src="/shots/pt/cards.webp" alt="Cartões de cena do Owlio em grade, com número, local e horário" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-2" hidden><img src="/shots/pt/relations.webp" alt="Mapa de relações com três personagens ligados" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-3" hidden><img src="/shots/pt/beat-board.webp" alt="Beat Board com cartões de ideias ligados por linhas" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-4" hidden><img src="/shots/pt/avatar.webp" alt="Criador de avatar em pixel art com opções de roupa" width="1000" height="700" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="estrutura" aria-labelledby="estrutura-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 id="estrutura-h" class="span-5">8 estruturas na linha do tempo</h2>
+        <p class="span-6 start-7 lead-grey">O filme da esquerda para a direita: páginas, atos, cenas e uma linha por personagem. Arraste os atos e compare o escrito com a duração planejada.</p>
+      </div>
+      <div data-moment="marquee-row" data-moment-opts='{"speed": 30}' class="mq">
+        <ul class="mo-mq__track" data-edge-free><li>Três atos</li><li>Fragmentada</li><li>Episódio de TV</li><li>Sitcom</li><li>Cinco atos</li><li>Save the Cat</li><li>Jornada do herói</li><li>Kishōtenketsu</li></ul>
+      </div>
+      <div class="frame frame--wide">
+        <img class="frame__img" src="/shots/pt/timeline.webp" alt="Linha do tempo do Owlio com a régua de páginas, os atos, as cenas coloridas e uma linha por personagem" width="1440" height="900" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="versoes" data-moment="iris-opens" data-moment-opts='{"from": "surface"}' aria-labelledby="versoes-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 id="versoes-h" class="span-5">Versões: volte a qualquer cópia do roteiro</h2>
+        <div class="span-6 start-7 stack-4">
+          <p class="lead-grey">As cópias ficam empilhadas da mais nova à mais antiga. Arraste a linha do tempo, escolha uma e clique em Restaurar. Um Ctrl+Z desfaz.</p>
+          <ul class="facts">
+            <li>Salva sozinho a cada 5 minutos</li>
+            <li>Cópia de recuperação a cada 20 segundos</li>
+            <li>Até 30 cópias com data por roteiro</li>
+          </ul>
+        </div>
+      </div>
+      <div class="frame frame--wide frame--dark">
+        <img class="frame__img" src="/shots/pt/versions.webp" alt="Janela Versões sobre o roteiro: cópias empilhadas da mais nova à mais antiga, com as datas à direita" width="1440" height="900" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pdf" aria-labelledby="pdf-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-5">
+          <h2 id="pdf-h">O PDF do roteiro sai igual à tela</h2>
+          <p class="t-lead">A tela, a impressão e o PDF usam o mesmo desenho de página, com as fontes embutidas.</p>
+          <ul class="facts">
+            <li>Fala dividida ganha (MAIS) e (CONT.)</li>
+            <li>Página de rosto com prévia ao vivo</li>
+            <li>Marca d'água com o nome de quem recebe</li>
+          </ul>
+          <a class="link" href="#perguntas">Ler as perguntas frequentes</a>
+        </div>
+        <div class="frame frame--split span-6 start-7">
+          <div class="stage stage--fade-br">
+            <div class="at-corner to-edge shot"><img src="/shots/pt/print.webp" alt="Janela de impressão do Owlio com a prévia das folhas e a marca d'água" width="1100" height="720" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="download" aria-labelledby="download-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-5">
+          <h2 id="download-h">O editor no Windows e no Linux</h2>
+          <p>O instalador põe o Owlio só para o seu usuário, sem pedir administrador, e pode abrir arquivos .fountain e .fdx.</p>
+          <p>Ele ainda não é assinado. Se o Windows mostrar "Editor desconhecido", clique em Mais informações e depois em Executar assim mesmo.</p>
+          <a class="link" href="https://github.com/berdfandrade/owlio/releases">Ver todas as versões no GitHub</a>
+        </div>
+        <div class="span-6 start-7">
+          <div class="term" role="img" aria-label="Comandos para compilar o Owlio no Linux com CMake e Qt 6">
+            <div class="term__bar"><i></i><i></i><i></i><span>Linux, com Qt 6 e CMake</span></div>
+<pre class="term__body"><code><span class="term__c"># dependências (Ubuntu)</span>
+sudo apt install cmake g++ qt6-base-dev qt6-svg-dev libxcb-cursor0
+
+<span class="term__c"># baixar o código</span>
+git clone https://github.com/berdfandrade/owlio
+cd owlio
+
+<span class="term__c"># compilar</span>
+cmake -S . -B build
+cmake --build build -j
+
+<span class="term__c"># abrir</span>
+./build/owlio</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="perguntas" aria-labelledby="perguntas-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-4">
+          <h2 id="perguntas-h">Perguntas sobre o editor</h2>
+          <p class="muted">O que roteiristas perguntam antes de baixar.</p>
+          <a class="link" href="https://github.com/berdfandrade/owlio/issues">Abrir uma pergunta no GitHub</a>
+          <div class="frame faq-shot"><img class="frame__img" src="/shots/pt/character.webp" alt="Ficha da personagem Helena, com avatar, papel, idade, falas e cenas" width="900" height="680" loading="lazy"></div>
+        </div>
+        <div class="faq span-6 start-7">
+          <div class="faq__item"><h3>Preciso do Final Draft para usar o editor?</h3><p>Não. O Owlio abre e salva arquivos .fdx, mas o formato principal é o Fountain, texto puro que outros apps também leem.</p></div>
+          <div class="faq__item"><h3>O PDF do roteiro fica igual à tela?</h3><p>Sim. A tela e o PDF usam o mesmo desenho de página.</p></div>
+          <div class="faq__item"><h3>O editor funciona em português?</h3><p>Sim. A interface e as convenções do roteiro (DIA, NOITE, CORTA PARA:, (MAIS), (CONT.)) podem ser em português.</p></div>
+          <div class="faq__item"><h3>E se o editor fechar de repente?</h3><p>Ele guarda uma cópia de recuperação a cada 20 segundos e oferece as alterações de volta quando você abre de novo.</p></div>
+          <div class="faq__item"><h3>Tem o editor para Mac?</h3><p>Ainda não. Por enquanto, Windows com instalador e Linux compilando o código.</p></div>
+          <div class="faq__item"><h3>Qual é o tamanho da página do roteiro?</h3><p>US Letter, o padrão dos roteiros americanos. Páginas A4 estão nos planos.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Escreva o próximo roteiro no Owlio</h2><p class="t-lead">Instalador para Windows, em português e inglês.</p></div>
+        <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Baixar para Windows<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">Owlio</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <p class="footer__lede">Editor de roteiros com páginas de verdade, cartões de cena e PDF igual à tela.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Escrever</h3><ul><li><a href="#roteiro">Roteiro</a></li><li><a href="#escrita">Escrita</a></li><li><a href="#atalhos">Atalhos</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Organizar</h3><ul><li><a href="#historia">História</a></li><li><a href="#estrutura">Estrutura</a></li><li><a href="#versoes">Versões</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Baixar</h3><ul><li><a href="#download">Download</a></li><li><a href="#perguntas">Perguntas</a></li><li><a href="https://github.com/berdfandrade/owlio">GitHub</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Idioma</h3><ul><li><a href="./" aria-current="page">Português</a></li><li><a href="en/" hreflang="en" lang="en">English</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Owlio</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/assets/system.js"></script>
+<script type="module" src="/assets/motion/motion.js"></script>
+<script type="module" src="/assets/layout/layout.js"></script>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

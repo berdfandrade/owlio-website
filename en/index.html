@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-ground="sky" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Owlio: screenwriting app for film and TV</title>
+<meta name="description" content="Write scripts on US Letter pages in industry format, sort scenes on index cards and export a PDF that matches the screen.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Owlio: screenwriting app for film and TV">
+<meta property="og:description" content="Real script pages, index cards, a timeline and a PDF that matches the screen.">
+<meta property="og:image" content="/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png" type="image/png">
+<meta name="theme-color" content="#f7f7f5">
+<!-- <link rel="canonical" href="https://[Owlio domain]/en/"> -->
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..700&family=Figtree:wght@400..600&family=DM+Mono:wght@400;500&family=Courier+Prime&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/system.css">
+<link rel="stylesheet" href="/assets/ui/cards.css">
+<link rel="stylesheet" href="/assets/motion/motion.css">
+<link rel="stylesheet" href="/assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="/assets/layout/layout.css">
+<style>
+:root {
+  --p-bg: #f7f7f5; --p-surface: #ebebe8; --p-ink: #1b1d22; --p-muted: #66676a;
+  --p-accent: #3b6cf6; --p-accent-ink: #ffffff; --p-action: #3b6cf6; --p-action-ink: #ffffff;
+  --p-inv-bg: #1b1d22; --p-inv-surface: #282a2e; --p-inv-ink: #f7f7f5; --p-inv-muted: #9b9c9d;
+  --p-inv-accent: #3b6cf6; --p-inv-accent-ink: #ffffff; --p-inv-action: #3b6cf6; --p-inv-action-ink: #ffffff;
+  --font-display: "Gabarito", system-ui, sans-serif;
+  --font-text: "Figtree", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --ly-scale: 0.98;
+}
+</style>
+<link rel="stylesheet" href="/assets/ui/base.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="/assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="/assets/moments/moments.js">
+<link rel="modulepreload" href="/assets/moments/lib.js">
+<link rel="modulepreload" href="/assets/moments/iris-opens/moment.js">
+<link rel="modulepreload" href="/assets/moments/marquee-row/moment.js">
+<link rel="stylesheet" href="/src/site.css">
+</head>
+<body>
+<!-- type: software
+     deal: hero split, nav nav-centre, close close-word, footer footer-dark, rhythm surface-pairs, buttons arrow,
+     mark: the client's own owl logo (replaces the dealt wordmark), palette: the client's own blue (#3b6cf6, the app's
+     accent) through start.mjs brand in place of card-pastels, type gabarito, ground sky (dealt sage; sky sits with the
+     client's blue)
+     moments: marquee-row in #estrutura (the eight structure templates), iris-opens in #versoes (the inverse ground) -->
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><img class="logo-owl" src="/owlio-96.png" alt="" width="28" height="28">Owlio</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#roteiro">Script</a></div>
+      <div class="nav__item"><a class="nav__link" href="#escrita">Writing</a></div>
+      <div class="nav__item"><a class="nav__link" href="#historia">Story</a></div>
+      <div class="nav__item"><a class="nav__link" href="#versoes">Versions</a></div>
+      <div class="nav__item"><a class="nav__link" href="#download">Download</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__link" href="../" hreflang="pt-BR" lang="pt-BR">Português</a>
+      <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Download for Windows</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text grid hero-split">
+        <div class="hero-copy span-5">
+          <p class="hero-notice">Courier 12, industry margins, one page per minute of screen time</p>
+          <h1 id="hero-h">Screenwriting app for film and TV</h1>
+          <p class="t-lead">You write on US Letter pages on screen, Enter and Tab pick the next element, and the PDF comes out exactly as you see it.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Download for Windows<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+            <a class="btn btn--secondary" href="https://github.com/berdfandrade/owlio">See the code on GitHub</a>
+          </div>
+          <dl class="hero-facts">
+            <div><dt>Files</dt><dd>Fountain and Final Draft</dd></div>
+            <div><dt>Languages</dt><dd>English and Portuguese</dd></div>
+            <div><dt>Systems</dt><dd>Windows and Linux</dd></div>
+          </dl>
+        </div>
+        <div class="hero-visual frame frame--photo span-6 start-7 hero-shot">
+          <img class="frame__img" src="/shots/en/script.webp" alt="Owlio with a script open: the scene list on the left and the Courier page on the right" width="1440" height="900" fetchpriority="high" data-source="client" data-subject="the Owlio script editor">
+          <div class="float-card" aria-hidden="true">
+            <span class="float-card__dot"></span>
+            <span class="float-card__key">Enter</span>
+            <span class="float-card__text">after <b>TOMAS</b> starts the <b data-next>Dialogue</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roteiro" aria-labelledby="roteiro-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 id="roteiro-h" class="span-5">Your script on real pages</h2>
+        <p class="span-6 start-7 muted lead-grey">On the left, the scenes with their page and who speaks in them. On the right, the page in Courier 12, with a 1.5 inch left margin and 1 inch on the other sides. <a class="link" href="#atalhos">See the shortcuts</a></p>
+      </div>
+      <div class="frame frame--wide frame--app"><img class="frame__img" src="/shots/en/script-dark.webp" alt="Owlio in the dark theme: scenes and characters on the left, the script page on the right" width="1440" height="900" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="section" id="escrita" aria-labelledby="escrita-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head">
+          <h2 id="escrita-h">Script formatting that happens as you type. <span class="muted">Owlio handles the margins and the names.</span></h2>
+        </div>
+        <div class="grid">
+          <article class="card card--row card--open span-6">
+            <h3>Picks the next element</h3>
+            <p>Enter after a character name starts the dialogue. Tab on an empty action line turns it into a character.</p>
+            <div class="panel panel--shot crop--fit"><img class="frame__img" src="/shots/en/elements.webp" alt="Owlio element list open, with Scene Heading, Action, Character, Parenthetical, Dialogue and Transition" loading="lazy"></div>
+          </article>
+          <article class="card card--row card--open span-6">
+            <h3>Completes names and places</h3>
+            <p>Suggests the characters who speak most, places you already used and extensions like (V.O.). Accept with Tab.</p>
+            <div class="panel panel--shot crop--page"><img class="frame__img" src="/shots/en/autocomplete.webp" alt="A character cue being typed, with the rest of the name suggested in grey" loading="lazy"></div>
+          </article>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-6">
+          <h3>Puts 2 lines side by side</h3>
+          <p>When two characters talk at once, Ctrl+Shift+D sets dual dialogue on the page.</p>
+          <div class="panel panel--shot crop--page"><img class="frame__img" src="/shots/en/dual.webp" alt="Dual dialogue on the page: two speeches side by side" loading="lazy"></div>
+        </article>
+        <article class="card card--row card--open span-6">
+          <h3>Writes in English or Portuguese</h3>
+          <p>DAY, NIGHT and CUT TO: or DIA, NOITE and CORTA PARA:, chosen apart from the interface language.</p>
+          <div class="panel panel--shot crop--fit"><img class="frame__img" src="/shots/en/settings.webp" alt="Script settings with the conventions language and the page font" loading="lazy"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="atalhos" aria-labelledby="atalhos-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="atalhos-h">Shortcuts for writing the script</h2>
+        <p>The whole script without taking your hands off the keys.</p>
+      </div>
+      <div class="grid grid--top">
+        <ul class="rows span-5">
+          <li><span class="rows__name">Next element</span><span class="rows__value"><kbd>Enter</kbd></span></li>
+          <li><span class="rows__name">Change the element type</span><span class="rows__value"><kbd>Tab</kbd></span></li>
+          <li><span class="rows__name">Pick the element</span><span class="rows__value"><kbd>Ctrl+1</kbd> to <kbd>Ctrl+6</kbd></span></li>
+          <li><span class="rows__name">Dual dialogue</span><span class="rows__value"><kbd>Ctrl+Shift+D</kbd></span></li>
+          <li><span class="rows__name">Focus mode</span><span class="rows__value"><kbd>Ctrl+Shift+F</kbd></span></li>
+          <li><span class="rows__name">Find and replace</span><span class="rows__value"><kbd>Ctrl+F</kbd></span></li>
+          <li><span class="rows__name">Export PDF</span><span class="rows__value"><kbd>Ctrl+Shift+E</kbd></span></li>
+          <li><span class="rows__name">Versions</span><span class="rows__value"><kbd>Ctrl+Shift+H</kbd></span></li>
+        </ul>
+        <div class="span-6 start-7 keys-shot">
+          <div class="shot"><img src="/shots/en/shortcuts.webp" alt="Owlio shortcuts window with the keys drawn" width="720" height="900" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="historia" aria-labelledby="historia-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5">
+          <div class="section-head">
+            <h2 id="historia-h">The script from above</h2>
+            <p>Cards, map, board and characters read the same script and change with it.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Parts of Owlio">
+            <button class="tab" role="tab" id="t-1" aria-selected="true" aria-controls="tp-1 ts-1">Move scenes</button>
+            <button class="tab" role="tab" id="t-2" aria-selected="false" aria-controls="tp-2 ts-2" tabindex="-1">Link characters</button>
+            <button class="tab" role="tab" id="t-3" aria-selected="false" aria-controls="tp-3 ts-3" tabindex="-1">Collect ideas</button>
+            <button class="tab" role="tab" id="t-4" aria-selected="false" aria-controls="tp-4 ts-4" tabindex="-1">Make avatars</button>
+          </div>
+          <div class="tab-panels">
+            <div role="tabpanel" id="tp-1" aria-labelledby="t-1"><p>Each scene becomes a card with its place, a colour for the time of day, the page and who speaks. Drag a card and the whole scene moves in the script.</p></div>
+            <div role="tabpanel" id="tp-2" aria-labelledby="t-2" hidden><p>Drag from one avatar to another to link two characters. Family, love, conflict or work, each with its colour and a label of your own.</p></div>
+            <div role="tabpanel" id="tp-3" aria-labelledby="t-3" hidden><p>The Beat Board is an endless board for ideas: cards with colour and pictures, flow lines and as much zoom as you like.</p></div>
+            <div role="tabpanel" id="tp-4" aria-labelledby="t-4" hidden><p>Build a pixel-art avatar for each character: body, skin, hair, clothes and background, with a Random button.</p></div>
+          </div>
+        </div>
+        <div class="frame frame--split span-6 start-7">
+          <div class="stage stage--fade-br">
+            <div class="at-corner to-edge shot" id="ts-1"><img src="/shots/en/cards.webp" alt="Owlio index cards in a grid, with number, place and time of day" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-2" hidden><img src="/shots/en/relations.webp" alt="Relationship map with three linked characters" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-3" hidden><img src="/shots/en/beat-board.webp" alt="Beat Board with idea cards joined by lines" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-4" hidden><img src="/shots/en/avatar.webp" alt="Pixel-art avatar creator with clothing options" width="1000" height="700" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="estrutura" aria-labelledby="estrutura-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 id="estrutura-h" class="span-5">8 structures on the timeline</h2>
+        <p class="span-6 start-7 lead-grey">The film from left to right: pages, acts, scenes and one row per character. Drag the acts and compare what you wrote with the planned length.</p>
+      </div>
+      <div data-moment="marquee-row" data-moment-opts='{"speed": 30}' class="mq">
+        <ul class="mo-mq__track" data-edge-free><li>Three acts</li><li>Fragmented</li><li>TV episode</li><li>Sitcom</li><li>Five acts</li><li>Save the Cat</li><li>Hero's journey</li><li>Kishōtenketsu</li></ul>
+      </div>
+      <div class="frame frame--wide">
+        <img class="frame__img" src="/shots/en/timeline.webp" alt="Owlio timeline with the page ruler, the acts, coloured scenes and one row per character" width="1440" height="900" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="versoes" data-moment="iris-opens" data-moment-opts='{"from": "surface"}' aria-labelledby="versoes-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 id="versoes-h" class="span-5">Versions: go back to any copy of your script</h2>
+        <div class="span-6 start-7 stack-4">
+          <p class="lead-grey">Copies stack from newest to oldest. Drag the timeline, pick one and click Restore. Ctrl+Z undoes it.</p>
+          <ul class="facts">
+            <li>Saves on its own every 5 minutes</li>
+            <li>A recovery copy every 20 seconds</li>
+            <li>Up to 30 dated copies per script</li>
+          </ul>
+        </div>
+      </div>
+      <div class="frame frame--wide frame--dark">
+        <img class="frame__img" src="/shots/en/versions.webp" alt="Versions window: copies of the script stacked in perspective with the timeline on the right" width="1440" height="900" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pdf" aria-labelledby="pdf-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-5">
+          <h2 id="pdf-h">The script PDF matches the screen</h2>
+          <p class="t-lead">The screen, the printout and the PDF use the same page drawing, with the fonts embedded.</p>
+          <ul class="facts">
+            <li>Split dialogue gets (MORE) and (CONT'D)</li>
+            <li>A title page with a live preview</li>
+            <li>A watermark with the reader's name</li>
+          </ul>
+          <a class="link" href="#perguntas">Read the questions</a>
+        </div>
+        <div class="frame frame--split span-6 start-7">
+          <div class="stage stage--fade-br">
+            <div class="at-corner to-edge shot"><img src="/shots/en/print.webp" alt="Owlio print window with the sheet preview and the watermark" width="1100" height="720" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="download" aria-labelledby="download-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-5">
+          <h2 id="download-h">The app on Windows and Linux</h2>
+          <p>The installer sets Owlio up for your user only, without asking for an administrator, and can open .fountain and .fdx files.</p>
+          <p>It is not signed yet. If Windows shows "Unknown publisher", click More info and then Run anyway.</p>
+          <a class="link" href="https://github.com/berdfandrade/owlio/releases">See every release on GitHub</a>
+        </div>
+        <div class="span-6 start-7">
+          <div class="term" role="img" aria-label="Commands to build Owlio on Linux with CMake and Qt 6">
+            <div class="term__bar"><i></i><i></i><i></i><span>Linux, with Qt 6 and CMake</span></div>
+<pre class="term__body"><code><span class="term__c"># dependencies (Ubuntu)</span>
+sudo apt install cmake g++ qt6-base-dev qt6-svg-dev libxcb-cursor0
+
+<span class="term__c"># get the code</span>
+git clone https://github.com/berdfandrade/owlio
+cd owlio
+
+<span class="term__c"># build</span>
+cmake -S . -B build
+cmake --build build -j
+
+<span class="term__c"># run</span>
+./build/owlio</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="perguntas" aria-labelledby="perguntas-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-4">
+          <h2 id="perguntas-h">Questions about the app</h2>
+          <p class="muted">What screenwriters ask before they download.</p>
+          <a class="link" href="https://github.com/berdfandrade/owlio/issues">Ask a question on GitHub</a>
+          <div class="frame faq-shot"><img class="frame__img" src="/shots/en/character.webp" alt="Character sheet for Helena, with avatar, role, age, lines and scenes" width="900" height="680" loading="lazy"></div>
+        </div>
+        <div class="faq span-6 start-7">
+          <div class="faq__item"><h3>Do I need Final Draft?</h3><p>No. Owlio opens and saves .fdx files, but its main format is Fountain, plain text that other apps read too.</p></div>
+          <div class="faq__item"><h3>Does the PDF look like the screen?</h3><p>Yes. The screen and the PDF use the same page drawing.</p></div>
+          <div class="faq__item"><h3>Does it work in Portuguese?</h3><p>Yes. The interface and the script conventions (DIA, NOITE, CORTA PARA:, (MAIS), (CONT.)) can be in Portuguese.</p></div>
+          <div class="faq__item"><h3>What if the app closes suddenly?</h3><p>It keeps a recovery copy every 20 seconds and offers your changes back when you open it again.</p></div>
+          <div class="faq__item"><h3>Is there a Mac version?</h3><p>Not yet. For now, Windows with an installer and Linux by building the code.</p></div>
+          <div class="faq__item"><h3>What page size does it use?</h3><p>US Letter, the standard for American scripts. A4 pages are planned.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Write your next script in Owlio</h2><p class="t-lead">An installer for Windows, in English and Portuguese.</p></div>
+        <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Download for Windows<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">Owlio</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <p class="footer__lede">A screenwriting app with real pages, index cards and a PDF that matches the screen.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Write</h3><ul><li><a href="#roteiro">Script</a></li><li><a href="#escrita">Writing</a></li><li><a href="#atalhos">Shortcuts</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Organize</h3><ul><li><a href="#historia">Story</a></li><li><a href="#estrutura">Structure</a></li><li><a href="#versoes">Versions</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Get it</h3><ul><li><a href="#download">Download</a></li><li><a href="#perguntas">Questions</a></li><li><a href="https://github.com/berdfandrade/owlio">GitHub</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Language</h3><ul><li><a href="../" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="./" aria-current="page">English</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Owlio</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/assets/system.js"></script>
+<script type="module" src="/assets/motion/motion.js"></script>
+<script type="module" src="/assets/layout/layout.js"></script>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
