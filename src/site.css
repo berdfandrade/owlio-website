@@ -63,6 +63,47 @@ kbd { font-family: var(--font-mono); font-size: 13px; padding: 2px 7px; border: 
 
 .close__word { letter-spacing: -0.05em; }
 
+/* Versões: a pilha de cópias do roteiro que recua enquanto a página rola (src/versions-stack.js).
+   Sem JavaScript, fica a captura da janela Versões. */
+html.mo-js .vstack-fallback { display: none; }
+html:not(.mo-js) .vstack { display: none; }
+.vstack { --stage-h: min(620px, 80vh); --w: 360px; --in: calc(var(--w) / 8.5); position: relative; height: calc(var(--stage-h) + 1100px); margin-top: var(--s-6); }
+.vstack__stage { position: sticky; top: calc(50vh - var(--stage-h) / 2); height: var(--stage-h); overflow: hidden; border-radius: var(--r-lg); border: 1px solid color-mix(in srgb, #fff 12%, transparent); perspective: 1100px; perspective-origin: 50% 10%;
+  background:
+    radial-gradient(ellipse 34% 26% at 50% 4%, rgba(160, 178, 255, .55), transparent 70%),
+    radial-gradient(1px 1px at 12% 22%, #fff9, transparent), radial-gradient(1px 1px at 78% 14%, #fff8, transparent),
+    radial-gradient(1px 1px at 33% 68%, #fff6, transparent), radial-gradient(1.5px 1.5px at 88% 52%, #fffa, transparent),
+    radial-gradient(1px 1px at 61% 81%, #fff7, transparent), radial-gradient(1px 1px at 6% 86%, #fff6, transparent),
+    radial-gradient(1px 1px at 46% 38%, #fff5, transparent), radial-gradient(1.5px 1.5px at 22% 48%, #fff8, transparent),
+    linear-gradient(#0b0e1c, #141a3a 55%, #1d2550);
+  background-size: auto, 230px 190px, 260px 210px, 210px 240px, 300px 260px, 240px 200px, 270px 230px, 190px 170px, 250px 280px, auto; }
+.vstack__pages { position: absolute; inset: 0; transform-style: preserve-3d; }
+.vstack__page { position: absolute; left: 50%; bottom: 28px; width: var(--w); height: calc(var(--stage-h) - 150px); transform-origin: 50% 100%; will-change: transform, opacity; display: flex; flex-direction: column; border-radius: 8px 8px 0 0; overflow: hidden; background: #fff; box-shadow: 0 -2px 0 rgba(255, 255, 255, .25), 0 24px 60px rgba(0, 0, 0, .55); }
+.vstack__bar { display: flex; align-items: baseline; gap: 10px; padding: 8px 14px; background: #eceef4; color: #1b1d22; font: 500 12px/1.2 var(--font-text); border-bottom: 1px solid #d9dce5; white-space: nowrap; }
+.vstack__bar b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+.vstack__pg { color: #7a7f8c; }
+.vstack__when { margin-left: auto; color: #7a7f8c; }
+.vstack__sheet { flex: 1; padding: calc(var(--in) * .8) var(--in) 0 calc(var(--in) * 1.5); color: #111; font-family: "Courier Prime", "Courier New", monospace; font-size: calc(var(--in) / 6); line-height: calc(var(--in) / 6); overflow: hidden; }
+.vstack__sheet p { margin: calc(var(--in) / 6) 0 0; }
+.vstack__sheet p:first-child { margin-top: 0; }
+.vstack__sheet .vs-h { text-transform: uppercase; }
+.vstack__sheet .vs-c { margin-left: calc(var(--in) * 2.2); }
+.vstack__sheet .vs-p { margin: 0 0 0 calc(var(--in) * 1.6); max-width: calc(var(--in) * 2); }
+.vstack__sheet .vs-d { margin: 0 0 0 var(--in); max-width: calc(var(--in) * 3.5); }
+.vstack__sheet .vs-c + .vs-d { margin-top: 0; }
+.vstack__dates { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; justify-items: end; font: 500 13px/1 var(--font-text); color: rgba(228, 232, 245, .72); }
+.vstack__dates li { display: flex; align-items: center; gap: 10px; transition: color .25s; }
+.vstack__dates li::after { content: ""; width: 34px; height: 2px; border-radius: 2px; background: currentColor; opacity: .7; transition: width .25s, opacity .25s; }
+.vstack__dates li.is-on { color: #8fa6ff; }
+.vstack__dates li.is-on::after { width: 54px; opacity: 1; }
+.vstack--still { height: auto; }
+.vstack--still .vstack__stage { position: relative; top: auto; }
+@media (max-width: 639px) {
+  .vstack { --w: 250px; --stage-h: min(520px, 76vh); height: calc(var(--stage-h) + 900px); }
+  .vstack__dates { display: none; }
+  .vstack__bar { font-size: 11px; padding: 6px 10px; }
+}
+
 /* Tema escuro: as cores do tema escuro do próprio Owlio (src/theme.cpp). O botão de tema e o do
    sistema mudam data-theme no <html>; o kit inteiro sai destas variáveis. */
 :root[data-theme="dark"] {

@@ -260,7 +260,13 @@
           </ul>
         </div>
       </div>
-      <div class="frame frame--wide frame--dark">
+      <div class="vstack" data-vstack aria-hidden="true">
+        <div class="vstack__stage">
+          <div class="vstack__pages"></div>
+          <ol class="vstack__dates"></ol>
+        </div>
+      </div>
+      <div class="frame frame--wide frame--dark vstack-fallback">
         <img data-theme-only="light" class="frame__img" src="/shots/en/light/versions.webp" alt="Versions window: copies of the script stacked in perspective with the timeline on the right" width="1440" height="900" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/versions.webp" alt="Versions window: copies of the script stacked in perspective with the timeline on the right" width="1440" height="900" loading="lazy">
       </div>
     </div>
