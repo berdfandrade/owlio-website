@@ -1,34 +1,118 @@
-# Site do Owlio
+# Owlio Website
 
-No ar em https://berdfandrade.github.io/owlio-website/
+The official website for **Owlio**, a screenplay editor for film and television.
 
-Página de apresentação do [Owlio](https://github.com/berdfandrade/owlio), em português (`index.html`) e inglês (`en/index.html`), feita com Vite e o kit da taste skill.
+🌐 **Website:** https://berdfandrade.github.io/owlio-website/  
+💻 **Application:** https://github.com/berdfandrade/owlio
 
-```bash
-npm install
-npm run dev      # servidor local com recarga
-npm run build    # gera o site estático em dist/
+The website introduces Owlio, showcases its interface, and highlights its writing and story organization features. It is available in English and Portuguese and is hosted for free using GitHub Pages.
+
+## Technologies
+
+- **Vite** — development server and production builds.
+- **JavaScript** — interactions and dynamic functionality.
+- **CSS** — visual identity, layouts, and animations.
+- **GitHub Actions** — automated build and deployment.
+- **GitHub Pages** — website hosting.
+
+## Project Structure
+
+```text
+owlio-website/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── public/
+│   ├── assets/
+│   └── shots/
+│       ├── pt/
+│       └── en/
+├── src/
+│   ├── main.js
+│   └── site.css
+├── en/
+│   └── index.html
+├── index.html
+├── package.json
+└── vite.config.js
 ```
 
-## Link de download
+### Pages
 
-O botão "Baixar para Windows" aponta direto para o instalador da versão mais recente do Owlio (por exemplo `https://github.com/berdfandrade/owlio/releases/download/v0.1/Owlio-Setup-0.1.exe`), sem precisar editar nada a cada versão:
+- `index.html` — Portuguese version.
+- `en/index.html` — English version.
 
-- **No deploy**, a Action consulta a última release do `berdfandrade/owlio` e põe o link do `Owlio-Setup-*.exe` nas páginas. Ela roda a cada push e também uma vez por dia.
-- **Ao abrir a página**, o `src/main.js` consulta a API do GitHub de novo e atualiza o botão, caso tenha saído uma versão depois do último deploy.
-- **Sem instalador publicado**, fica o link do `.env` (a página de releases).
+### Visual Assets
 
-O link aparece no menu, no topo e no fim das duas páginas.
+- `src/site.css` — styles, layouts, and visual identity.
+- `src/main.js` — interactive elements and dynamic download link updates.
+- `public/assets/` — visual resources and design system assets.
+- `public/shots/` — actual application screenshots, organized by language.
 
-## Onde fica cada coisa
+Screenshots are captured directly from Owlio using sample screenplays to showcase the application's interface and features.
 
-- `index.html`, `en/index.html`: as duas páginas.
-- `src/site.css`, `src/main.js`: o estilo do site e a animação do cartão do Enter no topo.
-- `public/assets/`: o kit da taste skill (sistema, movimento, fragmentos e momentos), servido como arquivos soltos.
-- `public/shots/pt/` e `public/shots/en/`: capturas reais do Owlio em WebP, tiradas do app aberto com os roteiros de exemplo (`examples/`), com a interface em português e em inglês.
+## Local Development
 
-## Publicação
+Requirements: Node.js and npm.
 
-Cada push na `main` roda a Action `.github/workflows/deploy.yml`, que gera o site e publica no GitHub Pages.
+Clone the repository and install dependencies:
 
-O site fica em `/owlio-website/` (o `base` em `vite.config.js`). Com um domínio próprio, troque o `base` por `'/'`.
+```bash
+git clone https://github.com/berdfandrade/owlio-website.git
+cd owlio-website
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+To generate a production build:
+
+```bash
+npm run build
+```
+
+The static production files will be generated in the `dist/` directory.
+
+## Dynamic Download Link
+
+The download button automatically points to the latest Windows installer released for Owlio.
+
+The system works in two stages:
+
+1. **During deployment:** a GitHub Action queries the main repository's releases and updates the installer URL across both website versions.
+2. **During navigation:** `src/main.js` queries the GitHub API again to check whether a newer version is available.
+
+The installer is identified using the `Owlio-Setup-*.exe` filename pattern.
+
+If no installer has been published yet, the download button redirects visitors to the project's GitHub Releases page.
+
+This approach allows new Owlio versions to be published without manually updating download links on the website.
+
+## Deployment
+
+Deployment is fully automated through GitHub Actions.
+
+Whenever a push is made to the `main` branch, the `.github/workflows/deploy.yml` workflow:
+
+1. Installs project dependencies.
+2. Checks the latest Owlio release.
+3. Generates the production build.
+4. Publishes the contents of `dist/` to GitHub Pages.
+
+The workflow also runs periodically to keep the download link synchronized with the latest available releases.
+
+### GitHub Pages Configuration
+
+The website is hosted at:
+
+`https://berdfandrade.github.io/owlio-website/`
+
+Since the project is deployed under a repository subpath, `vite.config.js` uses `/owlio-website/` as its `base` configuration.
+
+If the project moves to a custom domain, this value should be changed to `/`.
+
+---
