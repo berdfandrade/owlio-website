@@ -1,8 +1,29 @@
-// Animação própria do site: o cartão do Enter sobre a captura do hero.
-// Fica parado quando o sistema pede menos movimento.
+// Scripts próprios do site: o botão de tema e o cartão do Enter sobre a captura do hero.
 
 const pt = document.documentElement.lang.startsWith('pt');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Tema: o <head> já aplicou o tema guardado ou o do sistema. O botão troca e guarda a escolha;
+// sem escolha guardada, a página acompanha o sistema quando ele muda.
+const root = document.documentElement;
+const themeColor = document.querySelector('meta[name="theme-color"]');
+const toggle = document.querySelector('[data-theme-toggle]');
+function applyTheme(t) {
+  root.dataset.theme = t;
+  if (themeColor) themeColor.content = t === 'dark' ? '#17181c' : '#f7f7f5';
+  toggle?.setAttribute('aria-pressed', String(t === 'dark'));
+}
+applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+toggle?.addEventListener('click', () => {
+  const t = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(t);
+  try { localStorage.setItem('theme', t); } catch (e) {}
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (err) {}
+  if (!saved) applyTheme(e.matches ? 'dark' : 'light');
+});
 
 // O cartão do hero: a tecla Enter é apertada e o próximo elemento aparece.
 const card = document.querySelector('.float-card');

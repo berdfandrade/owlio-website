@@ -47,6 +47,15 @@
 <link rel="modulepreload" href="/assets/moments/iris-opens/moment.js">
 <link rel="modulepreload" href="/assets/moments/marquee-row/moment.js">
 <link rel="stylesheet" href="/src/site.css">
+<script>
+  // O tema escolhido no botão, ou o do sistema; antes da pintura, para a página não piscar.
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
 </head>
 <body>
 <!-- type: software
@@ -67,6 +76,10 @@
       <div class="nav__item"><a class="nav__link" href="#download">Download</a></div>
     </nav>
     <div class="nav__actions">
+      <button class="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" data-theme-toggle>
+        <svg class="theme-toggle__moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.5 12.4A7 7 0 0 1 7.6 3.5a7 7 0 1 0 8.9 8.9z"/></svg>
+        <svg class="theme-toggle__sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5"/></svg>
+      </button>
       <a class="nav__link" href="../" hreflang="pt-BR" lang="pt-BR">Português</a>
       <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Download for Windows</a>
     </div>
@@ -81,7 +94,7 @@
     <div class="wrap">
       <div class="hero-text grid hero-split">
         <div class="hero-copy span-5">
-          <p class="hero-notice">Courier 12, industry margins, one page per minute of screen time</p>
+          <p class="hero-notice">Version 1.0 · Courier 12, industry margins, one page per minute of screen time</p>
           <h1 id="hero-h">Screenwriting app for film and TV</h1>
           <p class="t-lead">You write on US Letter pages on screen, Enter and Tab pick the next element, and the PDF comes out exactly as you see it.</p>
           <div class="btn-row">
@@ -91,11 +104,11 @@
           <dl class="hero-facts">
             <div><dt>Files</dt><dd>Fountain and Final Draft</dd></div>
             <div><dt>Languages</dt><dd>English and Portuguese</dd></div>
-            <div><dt>Systems</dt><dd>Windows and Linux</dd></div>
+            <div><dt>License</dt><dd>Free software, GPL-3.0</dd></div>
           </dl>
         </div>
         <div class="hero-visual frame frame--photo span-6 start-7 hero-shot">
-          <img class="frame__img" src="/shots/en/script.webp" alt="Owlio with a script open: the scene list on the left and the Courier page on the right" width="1440" height="900" fetchpriority="high" data-source="client" data-subject="the Owlio script editor">
+          <img data-theme-only="light" class="frame__img" src="/shots/en/light/script.webp" alt="Owlio with a script open: the scene list on the left and the Courier page on the right" width="1440" height="900" fetchpriority="high" data-source="client" data-subject="the Owlio script editor"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/script.webp" alt="Owlio with a script open: the scene list on the left and the Courier page on the right" width="1440" height="900" loading="lazy" data-source="client" data-subject="the Owlio script editor">
           <div class="float-card" aria-hidden="true">
             <span class="float-card__dot"></span>
             <span class="float-card__key">Enter</span>
@@ -112,7 +125,7 @@
         <h2 id="roteiro-h" class="span-5">Your script on real pages</h2>
         <p class="span-6 start-7 muted lead-grey">On the left, the scenes with their page and who speaks in them. On the right, the page in Courier 12, with a 1.5 inch left margin and 1 inch on the other sides. <a class="link" href="#atalhos">See the shortcuts</a></p>
       </div>
-      <div class="frame frame--wide frame--app"><img class="frame__img" src="/shots/en/script-dark.webp" alt="Owlio in the dark theme: scenes and characters on the left, the script page on the right" width="1440" height="900" loading="lazy"></div>
+      <div class="frame frame--wide frame--app"><img data-theme-only="light" class="frame__img" src="/shots/en/light/script-end.webp" alt="Owlio with the last page of the script open: scenes and characters on the left, the page on the right" width="1440" height="900" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/script-end.webp" alt="Owlio with the last page of the script open: scenes and characters on the left, the page on the right" width="1440" height="900" loading="lazy"></div>
     </div>
   </section>
 
@@ -126,12 +139,12 @@
           <article class="card card--row card--open span-6">
             <h3>Picks the next element</h3>
             <p>Enter after a character name starts the dialogue. Tab on an empty action line turns it into a character.</p>
-            <div class="panel panel--shot crop--fit"><img class="frame__img" src="/shots/en/elements.webp" alt="Owlio element list open, with Scene Heading, Action, Character, Parenthetical, Dialogue and Transition" loading="lazy"></div>
+            <div class="panel panel--shot crop--fit"><img data-theme-only="light" class="frame__img" src="/shots/en/light/elements.webp" alt="Owlio element list open, with Scene Heading, Action, Character, Parenthetical, Dialogue and Transition" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/elements.webp" alt="Owlio element list open, with Scene Heading, Action, Character, Parenthetical, Dialogue and Transition" loading="lazy"></div>
           </article>
           <article class="card card--row card--open span-6">
             <h3>Completes names and places</h3>
             <p>Suggests the characters who speak most, places you already used and extensions like (V.O.). Accept with Tab.</p>
-            <div class="panel panel--shot crop--page"><img class="frame__img" src="/shots/en/autocomplete.webp" alt="A character cue being typed, with the rest of the name suggested in grey" loading="lazy"></div>
+            <div class="panel panel--shot crop--page"><img data-theme-only="light" class="frame__img" src="/shots/en/light/autocomplete.webp" alt="A character cue being typed, with the rest of the name suggested in grey" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/autocomplete.webp" alt="A character cue being typed, with the rest of the name suggested in grey" loading="lazy"></div>
           </article>
         </div>
       </div>
@@ -139,12 +152,24 @@
         <article class="card card--row card--open span-6">
           <h3>Puts 2 lines side by side</h3>
           <p>When two characters talk at once, Ctrl+Shift+D sets dual dialogue on the page.</p>
-          <div class="panel panel--shot crop--page"><img class="frame__img" src="/shots/en/dual.webp" alt="Dual dialogue on the page: two speeches side by side" loading="lazy"></div>
+          <div class="panel panel--shot crop--page"><img data-theme-only="light" class="frame__img" src="/shots/en/light/dual.webp" alt="Dual dialogue on the page: two speeches side by side" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/dual.webp" alt="Dual dialogue on the page: two speeches side by side" loading="lazy"></div>
         </article>
+        <article class="card card--row card--open span-6">
+          <h3>Checks the spelling of the script</h3>
+          <p>Underlines what is not in the English or Portuguese dictionary. Character names are skipped, and the rest goes into the script dictionary.</p>
+          <div class="panel panel--shot crop--page"><img data-theme-only="light" class="frame__img" src="/shots/en/light/spell.webp" alt="A misspelled word underlined on the page and the menu offering to add it to the script dictionary" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/spell.webp" alt="A misspelled word underlined on the page and the menu offering to add it to the script dictionary" loading="lazy"></div>
+        </article>
+      </div>
+      <div class="grid">
         <article class="card card--row card--open span-6">
           <h3>Writes in English or Portuguese</h3>
           <p>DAY, NIGHT and CUT TO: or DIA, NOITE and CORTA PARA:, chosen apart from the interface language.</p>
-          <div class="panel panel--shot crop--fit"><img class="frame__img" src="/shots/en/settings.webp" alt="Script settings with the conventions language and the page font" loading="lazy"></div>
+          <div class="panel panel--shot crop--fit"><img data-theme-only="light" class="frame__img" src="/shots/en/light/settings.webp" alt="Script settings with the conventions language, spelling and the page font" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/settings.webp" alt="Script settings with the conventions language, spelling and the page font" loading="lazy"></div>
+        </article>
+        <article class="card card--row card--open span-6">
+          <h3>Hides the rest in focus mode</h3>
+          <p>Ctrl+Shift+F dims the interface and the rest of the page, and leaves only the passage you are writing clear.</p>
+          <div class="panel panel--shot crop--fit"><img data-theme-only="light" class="frame__img" src="/shots/en/light/focus.webp" alt="Owlio in focus mode, with the rest of the page dimmed" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/focus.webp" alt="Owlio in focus mode, with the rest of the page dimmed" loading="lazy"></div>
         </article>
       </div>
     </div>
@@ -168,7 +193,7 @@
           <li><span class="rows__name">Versions</span><span class="rows__value"><kbd>Ctrl+Shift+H</kbd></span></li>
         </ul>
         <div class="span-6 start-7 keys-shot">
-          <div class="shot"><img src="/shots/en/shortcuts.webp" alt="Owlio shortcuts window with the keys drawn" width="720" height="900" loading="lazy"></div>
+          <div class="shot"><img data-theme-only="light" src="/shots/en/light/shortcuts.webp" alt="Owlio shortcuts window with the keys drawn" width="720" height="900" loading="lazy"><img data-theme-only="dark" src="/shots/en/dark/shortcuts.webp" alt="Owlio shortcuts window with the keys drawn" width="720" height="900" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -192,15 +217,15 @@
             <div role="tabpanel" id="tp-1" aria-labelledby="t-1"><p>Each scene becomes a card with its place, a colour for the time of day, the page and who speaks. Drag a card and the whole scene moves in the script.</p></div>
             <div role="tabpanel" id="tp-2" aria-labelledby="t-2" hidden><p>Drag from one avatar to another to link two characters. Family, love, conflict or work, each with its colour and a label of your own.</p></div>
             <div role="tabpanel" id="tp-3" aria-labelledby="t-3" hidden><p>The Beat Board is an endless board for ideas: cards with colour and pictures, flow lines and as much zoom as you like.</p></div>
-            <div role="tabpanel" id="tp-4" aria-labelledby="t-4" hidden><p>Build a pixel-art avatar for each character: body, skin, hair, clothes and background, with a Random button.</p></div>
+            <div role="tabpanel" id="tp-4" aria-labelledby="t-4" hidden><p>Build a detailed pixel-art avatar for each character: face, nose, 31 hairstyles, glasses, hat, accessories, clothes and background, with a Random button.</p></div>
           </div>
         </div>
         <div class="frame frame--split span-6 start-7">
           <div class="stage stage--fade-br">
-            <div class="at-corner to-edge shot" id="ts-1"><img src="/shots/en/cards.webp" alt="Owlio index cards in a grid, with number, place and time of day" width="1440" height="900" loading="lazy"></div>
-            <div class="at-corner to-edge shot" id="ts-2" hidden><img src="/shots/en/relations.webp" alt="Relationship map with three linked characters" width="1440" height="900" loading="lazy"></div>
-            <div class="at-corner to-edge shot" id="ts-3" hidden><img src="/shots/en/beat-board.webp" alt="Beat Board with idea cards joined by lines" width="1440" height="900" loading="lazy"></div>
-            <div class="at-corner to-edge shot" id="ts-4" hidden><img src="/shots/en/avatar.webp" alt="Pixel-art avatar creator with clothing options" width="1000" height="700" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-1"><img data-theme-only="light" src="/shots/en/light/cards.webp" alt="Owlio index cards in a grid, with number, place and time of day" width="1440" height="900" loading="lazy"><img data-theme-only="dark" src="/shots/en/dark/cards.webp" alt="Owlio index cards in a grid, with number, place and time of day" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-2" hidden><img data-theme-only="light" src="/shots/en/light/relations.webp" alt="Relationship map with three linked characters" width="1440" height="900" loading="lazy"><img data-theme-only="dark" src="/shots/en/dark/relations.webp" alt="Relationship map with three linked characters" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-3" hidden><img data-theme-only="light" src="/shots/en/light/beat-board.webp" alt="Beat Board with idea cards joined by lines" width="1440" height="900" loading="lazy"><img data-theme-only="dark" src="/shots/en/dark/beat-board.webp" alt="Beat Board with idea cards joined by lines" width="1440" height="900" loading="lazy"></div>
+            <div class="at-corner to-edge shot" id="ts-4" hidden><img data-theme-only="light" src="/shots/en/light/avatar.webp" alt="Pixel-art avatar creator with the hairstyle options" width="1080" height="740" loading="lazy"><img data-theme-only="dark" src="/shots/en/dark/avatar.webp" alt="Pixel-art avatar creator with the hairstyle options" width="1080" height="740" loading="lazy"></div>
           </div>
         </div>
       </div>
@@ -217,7 +242,7 @@
         <ul class="mo-mq__track" data-edge-free><li>Three acts</li><li>Fragmented</li><li>TV episode</li><li>Sitcom</li><li>Five acts</li><li>Save the Cat</li><li>Hero's journey</li><li>Kishōtenketsu</li></ul>
       </div>
       <div class="frame frame--wide">
-        <img class="frame__img" src="/shots/en/timeline.webp" alt="Owlio timeline with the page ruler, the acts, coloured scenes and one row per character" width="1440" height="900" loading="lazy">
+        <img data-theme-only="light" class="frame__img" src="/shots/en/light/timeline.webp" alt="Owlio timeline with the page ruler, the acts, coloured scenes and one row per character" width="1440" height="900" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/timeline.webp" alt="Owlio timeline with the page ruler, the acts, coloured scenes and one row per character" width="1440" height="900" loading="lazy">
       </div>
     </div>
   </section>
@@ -236,7 +261,7 @@
         </div>
       </div>
       <div class="frame frame--wide frame--dark">
-        <img class="frame__img" src="/shots/en/versions.webp" alt="Versions window: copies of the script stacked in perspective with the timeline on the right" width="1440" height="900" loading="lazy">
+        <img data-theme-only="light" class="frame__img" src="/shots/en/light/versions.webp" alt="Versions window: copies of the script stacked in perspective with the timeline on the right" width="1440" height="900" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/versions.webp" alt="Versions window: copies of the script stacked in perspective with the timeline on the right" width="1440" height="900" loading="lazy">
       </div>
     </div>
   </section>
@@ -256,7 +281,7 @@
         </div>
         <div class="frame frame--split span-6 start-7">
           <div class="stage stage--fade-br">
-            <div class="at-corner to-edge shot"><img src="/shots/en/print.webp" alt="Owlio print window with the sheet preview and the watermark" width="1100" height="720" loading="lazy"></div>
+            <div class="at-corner to-edge shot"><img data-theme-only="light" src="/shots/en/light/print.webp" alt="Owlio print window with the sheet preview and the watermark" width="1100" height="720" loading="lazy"><img data-theme-only="dark" src="/shots/en/dark/print.webp" alt="Owlio print window with the sheet preview and the watermark" width="1100" height="720" loading="lazy"></div>
           </div>
         </div>
       </div>
@@ -269,7 +294,7 @@
         <div class="span-5 stack-5">
           <h2 id="download-h">The app on Windows and Linux</h2>
           <p>The installer sets Owlio up for your user only, without asking for an administrator, and can open .fountain and .fdx files.</p>
-          <p>It is not signed yet. If Windows shows "Unknown publisher", click More info and then Run anyway.</p>
+          <p>Releases are moving to code signing through SignPath Foundation. Until the first signed one is out, if Windows shows "Unknown publisher", click More info and then Run anyway.</p>
           <a class="link" href="https://github.com/berdfandrade/owlio/releases">See every release on GitHub</a>
         </div>
         <div class="span-6 start-7">
@@ -301,9 +326,10 @@ cmake --build build -j
           <h2 id="perguntas-h">Questions about the app</h2>
           <p class="muted">What screenwriters ask before they download.</p>
           <a class="link" href="https://github.com/berdfandrade/owlio/issues">Ask a question on GitHub</a>
-          <div class="frame faq-shot"><img class="frame__img" src="/shots/en/character.webp" alt="Character sheet for Helena, with avatar, role, age, lines and scenes" width="900" height="680" loading="lazy"></div>
+          <div class="frame faq-shot"><img data-theme-only="light" class="frame__img" src="/shots/en/light/character.webp" alt="Character sheet for Helena, with avatar, role, age, lines and scenes" width="900" height="680" loading="lazy"><img data-theme-only="dark" class="frame__img" src="/shots/en/dark/character.webp" alt="Character sheet for Helena, with avatar, role, age, lines and scenes" width="900" height="680" loading="lazy"></div>
         </div>
         <div class="faq span-6 start-7">
+          <div class="faq__item"><h3>Is the app free?</h3><p>Yes. Owlio is free software, with its code open on GitHub under the GPL-3.0 license.</p></div>
           <div class="faq__item"><h3>Do I need Final Draft?</h3><p>No. Owlio opens and saves .fdx files, but its main format is Fountain, plain text that other apps read too.</p></div>
           <div class="faq__item"><h3>Does the PDF look like the screen?</h3><p>Yes. The screen and the PDF use the same page drawing.</p></div>
           <div class="faq__item"><h3>Does it work in Portuguese?</h3><p>Yes. The interface and the script conventions (DIA, NOITE, CORTA PARA:, (MAIS), (CONT.)) can be in Portuguese.</p></div>
@@ -320,7 +346,7 @@ cmake --build build -j
   <div class="wrap">
     <div class="closing__cta close--word">
       <div class="section-head--split">
-        <div><h2 id="close-h">Write your next script in Owlio</h2><p class="t-lead">An installer for Windows, in English and Portuguese.</p></div>
+        <div><h2 id="close-h">Write your next script in Owlio</h2><p class="t-lead">Version 1.0 for Windows, in English and Portuguese.</p></div>
         <a class="btn btn--primary" href="%VITE_DOWNLOAD_URL%" data-download>Download for Windows<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
       <p class="close__word" aria-hidden="true">Owlio</p>
@@ -336,7 +362,7 @@ cmake --build build -j
         <div class="span-2 footer__col"><h3>Language</h3><ul><li><a href="../" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="./" aria-current="page">English</a></li></ul></div>
       </div>
       <div class="footer__legal">
-        <span>&copy; 2026 Owlio</span>
+        <span>&copy; 2026 Owlio · Free software, GPL-3.0</span>
       </div>
     </div>
   </div>

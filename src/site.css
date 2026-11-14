@@ -63,6 +63,33 @@ kbd { font-family: var(--font-mono); font-size: 13px; padding: 2px 7px; border: 
 
 .close__word { letter-spacing: -0.05em; }
 
+/* Tema escuro: as cores do tema escuro do próprio Owlio (src/theme.cpp). O botão de tema e o do
+   sistema mudam data-theme no <html>; o kit inteiro sai destas variáveis. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --p-bg: #17181c; --p-surface: #1c1d22; --p-ink: #e4e6eb; --p-muted: #9aa0ac;
+  --p-accent: #6c8cff; --p-accent-ink: #0f1426; --p-action: #6c8cff; --p-action-ink: #0f1426;
+  --p-inv-bg: #101114; --p-inv-surface: #1c1d22; --p-inv-ink: #e4e6eb; --p-inv-muted: #9aa0ac;
+  --p-inv-accent: #6c8cff; --p-inv-accent-ink: #0f1426; --p-inv-action: #6c8cff; --p-inv-action-ink: #0f1426;
+}
+:root[data-theme="dark"][data-ground] {
+  --ground-bg: #1f2531; --ground-surface: #262d3b; --ground-ink: #e4e6eb; --ground-muted: #9aa3b2; --ground-accent: #6c8cff;
+}
+:root[data-theme="dark"] kbd { background: #25272e; }
+:root[data-theme="dark"] .shot img, :root[data-theme="dark"] .frame--wide, :root[data-theme="dark"] .faq-shot { border-color: #2c2e36; }
+:root[data-theme="dark"] .frame--wide, :root[data-theme="dark"] .shot img, :root[data-theme="dark"] .panel--shot > .frame__img { box-shadow: 0 18px 48px rgba(0, 0, 0, .45); }
+
+/* Cada captura existe nos dois temas; só a do tema da página aparece (a outra nem é baixada). */
+:root:not([data-theme="dark"]) [data-theme-only="dark"],
+:root[data-theme="dark"] [data-theme-only="light"] { display: none !important; }
+
+/* Botão de tema no menu */
+.theme-toggle { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: var(--r-sm); background: transparent; color: var(--ink); cursor: pointer; }
+.theme-toggle:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.theme-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.theme-toggle__moon { fill: currentColor !important; stroke: none !important; }
+:root[data-theme="dark"] .theme-toggle__moon, :root:not([data-theme="dark"]) .theme-toggle__sun { display: none; }
+
 @media (min-width: 1024px) and (max-width: 1279px) { #pdf .frame--split { --ratio: 100%; } }
 @media (max-width: 420px) { .nav__actions .btn { display: none; } }
 @media (max-width: 639px) {
