@@ -5,7 +5,7 @@ The official website for **Owlio**, a screenplay editor for film and television.
 🌐 **Website:** https://berdfandrade.github.io/owlio-website/  
 💻 **Application:** https://github.com/berdfandrade/owlio
 
-The website introduces Owlio, showcases its interface, and highlights its writing and story organization features. It is available in English and Portuguese and is hosted for free using GitHub Pages.
+The website introduces Owlio, showcases its interface, and highlights its writing and story organization features. It is available in English and Portuguese, in a light and a dark theme, and is hosted for free using GitHub Pages.
 
 ## Technologies
 
@@ -25,11 +25,13 @@ owlio-website/
 ├── public/
 │   ├── assets/
 │   └── shots/
-│       ├── pt/
-│       └── en/
+│       ├── pt/{light,dark}/
+│       └── en/{light,dark}/
 ├── src/
 │   ├── main.js
 │   └── site.css
+├── tools/
+│   └── capture/
 ├── en/
 │   └── index.html
 ├── index.html
@@ -45,11 +47,23 @@ owlio-website/
 ### Visual Assets
 
 - `src/site.css` — styles, layouts, and visual identity.
-- `src/main.js` — interactive elements and dynamic download link updates.
+- `src/main.js` — the theme button, interactive elements and dynamic download link updates.
 - `public/assets/` — visual resources and design system assets.
-- `public/shots/` — actual application screenshots, organized by language.
+- `public/shots/` — actual application screenshots, organized by language and theme.
 
-Screenshots are captured directly from Owlio using sample screenplays to showcase the application's interface and features.
+## Light and Dark Themes
+
+The site follows the system theme, and the sun/moon button in the menu switches it and remembers the choice. The dark colors are the ones from Owlio's own dark theme, and every screenshot exists in both themes: the page shows the app in the same theme it is in, and the other picture is never downloaded.
+
+## Screenshots
+
+Every screenshot is a real capture of Owlio. `tools/capture/capture.py` opens the app in a virtual screen (Xephyr) with the sample screenplays from the Owlio repository, adds character sheets, avatars, relationships, a Beat Board and older versions, and saves each view in Portuguese and English, light and dark:
+
+```bash
+python3 tools/capture/capture.py --app ../owlio
+```
+
+It needs Linux with X11, Xephyr, `python3-xlib`, Pillow and Owlio built (`cmake --build build`). The app runs with its own settings in `.capture/`, so yours are left alone. Run it again whenever a screen in Owlio changes.
 
 ## Local Development
 
