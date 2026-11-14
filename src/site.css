@@ -1,9 +1,9 @@
 /* CSS da página: o que o kit não tem. Todas as imagens são capturas reais do Owlio. */
 
 /* Espaçamento: as seções crescem com o conteúdo, sem a altura fixa de uma tela inteira. */
-:root { --padt: 96px; --padb: 96px; }
+:root { --padt: 80px; --padb: 80px; }
 main > :is(section, .section):not(.hero), footer.closing { height: auto !important; min-height: 0 !important; }
-footer.closing { padding-top: 96px; }
+footer.closing { padding-top: 80px; }
 @media (max-width: 639px) {
   :root { --padt: 64px; --padb: 64px; }
   footer.closing { padding-top: 64px; }
@@ -108,7 +108,7 @@ html:not(.mo-js) .vstack { display: none; }
    sistema mudam data-theme no <html>; o kit inteiro sai destas variáveis. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --p-bg: #17181c; --p-surface: #1c1d22; --p-ink: #e4e6eb; --p-muted: #9aa0ac;
+  --p-bg: #17181c; --p-surface: #212329; --p-ink: #e4e6eb; --p-muted: #9aa0ac;
   --p-accent: #6c8cff; --p-accent-ink: #0f1426; --p-action: #6c8cff; --p-action-ink: #0f1426;
   --p-inv-bg: #101114; --p-inv-surface: #1c1d22; --p-inv-ink: #e4e6eb; --p-inv-muted: #9aa0ac;
   --p-inv-accent: #6c8cff; --p-inv-accent-ink: #0f1426; --p-inv-action: #6c8cff; --p-inv-action-ink: #0f1426;
