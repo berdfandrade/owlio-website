@@ -44,7 +44,6 @@
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="/assets/moments/moments.js">
 <link rel="modulepreload" href="/assets/moments/lib.js">
-<link rel="modulepreload" href="/assets/moments/iris-opens/moment.js">
 <link rel="modulepreload" href="/assets/moments/marquee-row/moment.js">
 <link rel="stylesheet" href="/src/site.css">
 <script>
@@ -63,7 +62,8 @@
      mark: the client's own owl logo (replaces the dealt wordmark), palette: the client's own blue (#3b6cf6, the app's
      accent) through start.mjs brand in place of card-pastels, type gabarito, ground sky (dealt sage; sky sits with the
      client's blue)
-     moments: marquee-row in #estrutura (the eight structure templates), iris-opens in #versoes (the inverse ground) -->
+     moments: marquee-row in #estrutura (the eight structure templates), the Versions stack in #versoes (src/versions-stack.js, scrubbed to the scroll; it replaced
+     iris-opens, whose block fades fought the moving pages) -->
 <header class="nav nav--centre">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Skip to content</a>
@@ -247,7 +247,7 @@
     </div>
   </section>
 
-  <section class="section ground-inverse" id="versoes" data-moment="iris-opens" data-moment-opts='{"from": "surface"}' aria-labelledby="versoes-h">
+  <section class="section ground-inverse" id="versoes" aria-labelledby="versoes-h">
     <div class="wrap">
       <div class="grid grid--top">
         <h2 id="versoes-h" class="span-5">Versions: go back to any copy of your script</h2>
