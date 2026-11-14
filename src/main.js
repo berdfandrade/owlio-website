@@ -1,4 +1,5 @@
-// Scripts próprios do site: o botão de tema e o cartão do Enter sobre a captura do hero.
+// Scripts próprios do site: o botão de tema, o cartão do Enter sobre a captura do hero e a pilha de Versões.
+import { versionsStack } from './versions-stack.js';
 
 const pt = document.documentElement.lang.startsWith('pt');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -49,6 +50,10 @@ if (card && !reduced) {
     text.replaceChildren(before, b(who), mid, b(next, true));
   }, 3200);
 }
+
+// A pilha de Versões, que recua enquanto a página rola.
+const stack = document.querySelector('[data-vstack]');
+if (stack) versionsStack(stack, { pt, reduced });
 
 // "Baixar para Windows" vai direto para o instalador da versão mais recente no GitHub.
 // O link do build (VITE_DOWNLOAD_URL) já vem resolvido pelo deploy; aqui ele só é atualizado
