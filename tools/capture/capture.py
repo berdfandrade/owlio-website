@@ -28,7 +28,7 @@ THEMES = {'light': 1, 'dark': 2}   # ThemeManager::Mode
 CROPS = {
     'pt': {'elements': (600, 40, 880, 280), 'autocomplete': (560, 620, 1240, 860), 'dual': (560, 495, 1240, 680),
            'spell': (560, 250, 1260, 540)},
-    'en': {'elements': (600, 40, 880, 280), 'autocomplete': (560, 640, 1240, 860), 'dual': (560, 250, 1300, 440),
+    'en': {'elements': (600, 40, 880, 280), 'autocomplete': (560, 640, 1240, 860), 'dual': (560, 250, 1260, 440),
            'spell': (560, 250, 1260, 540)},
 }
 # Onde clicar: a fala de Tomás que vira diálogo duplo, e o meio da palavra que leva um erro de digitação.

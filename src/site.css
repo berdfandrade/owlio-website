@@ -35,8 +35,11 @@ kbd { font-family: var(--font-mono); font-size: 13px; padding: 2px 7px; border: 
 .frame--dark { border-color: color-mix(in srgb, #fff 14%, transparent); box-shadow: none; }
 
 /* recortes da escrita: a lista de elementos, o autocompletar, o diálogo duplo, as convenções */
-#escrita .grid + .grid { margin-top: var(--s-7); }
-#escrita .panel { --p-h: 300px; }
+/* Um espaço só entre as fileiras de cartões, maior que o de dentro do cartão (32px até o quadro), e a
+   descrição ocupa a sobra para os quadros lado a lado começarem na mesma altura. */
+#escrita .group + .grid, #escrita .grid + .grid { margin-top: var(--s-8); }
+#escrita .card > p { flex: 1 0 auto; }
+#escrita .panel { --p-h: 300px; height: var(--p-h); flex: none; }
 .panel--shot { display: grid; place-items: center; padding: 24px; }
 .panel.panel--shot > .frame__img { position: static; inset: auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: var(--r-sm); box-shadow: 0 10px 30px rgba(20, 24, 40, .14); }
 .panel.crop--page > .frame__img { width: 100%; height: auto; }
@@ -137,6 +140,9 @@ html:not(.mo-js) .vstack { display: none; }
   .keys-shot { height: 320px; }
   .faq-shot { margin-top: var(--s-5); }
   #escrita .panel { --p-h: 200px; }
+  /* No celular os cartões empilham: o mesmo espaço entre cartões da fileira e entre fileiras. */
+  #escrita .grid { row-gap: var(--s-7); }
+  #escrita .group + .grid, #escrita .grid + .grid { margin-top: var(--s-7); }
   .panel--shot { padding: 12px; }
   .hero-shot .float-card { width: auto; right: 16px; left: 16px; bottom: 16px; }
   .mq { font-size: 22px; }
