@@ -4,3 +4,4 @@
 .taste-skill/*
 !.taste-skill/waivers.json
 /.capture/
+__pycache__/

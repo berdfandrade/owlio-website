@@ -20,7 +20,7 @@ footer.closing { padding-top: 96px; }
 kbd { font-family: var(--font-mono); font-size: 13px; padding: 2px 7px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent); border-bottom-width: 2px; border-radius: 6px; background: color-mix(in srgb, var(--bg) 70%, #fff); white-space: nowrap; }
 
 /* hero: a captura do app recortada na página, com o cartão do Enter por cima */
-.hero-shot .frame__img { object-fit: cover; object-position: 58% 0; }
+.hero-shot .frame__img { object-fit: cover; object-position: 50% 0; }
 .hero-shot .float-card { position: absolute; top: auto; right: auto; transform: none; left: 24px; bottom: 24px; width: 300px; display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 10px; padding: 14px 16px; background: var(--bg); color: var(--ink); border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); border-radius: var(--r-md); font-size: 14px; line-height: 1.35; z-index: 2; }
 .float-card__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--action); animation: breathe 2.4s ease-in-out infinite; }
 .float-card__key { font-family: var(--font-mono); font-size: 13px; padding: 3px 8px; border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); border-bottom-width: 2px; border-radius: 6px; }
@@ -144,7 +144,8 @@ html:not(.mo-js) .vstack { display: none; }
   #escrita .grid { row-gap: var(--s-7); }
   #escrita .group + .grid, #escrita .grid + .grid { margin-top: var(--s-7); }
   .panel--shot { padding: 12px; }
-  .hero-shot .float-card { width: auto; right: 16px; left: 16px; bottom: 16px; }
+  /* O quadro do topo fica baixo no celular: o cartão do Enter cobriria metade da captura. */
+  .hero-shot .float-card { display: none; }
   .mq { font-size: 22px; }
   .tab-panels { min-height: 0; }
   .term__body { font-size: 13px; padding: 16px; }
