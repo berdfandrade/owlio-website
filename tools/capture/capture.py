@@ -22,6 +22,9 @@ HERE = Path(__file__).resolve().parent
 WORK = SITE / '.capture'
 SCREEN = ':5'
 W, H = 1440, 900
+# A captura do topo do site: a janela em pé, do formato do quadro (628x716), larga o bastante para a
+# barra lateral e a página do roteiro inteira caberem sem cortes.
+HERO = (1200, 1362)
 THEMES = {'light': 1, 'dark': 2}   # ThemeManager::Mode
 
 # Recortes dos detalhes (x0, y0, x1, y1) na janela de 1440x900.
@@ -132,10 +135,13 @@ class Owlio:
         else:
             raise RuntimeError('o Owlio não abriu uma janela')
         self.main = self.windows()[0]
-        win = self.d.create_resource_object('window', self.main)
-        win.configure(x=0, y=0, width=W, height=H)
+        self.resize(W, H)
+        time.sleep(1.0)
+
+    def resize(self, w, h):
+        self.d.create_resource_object('window', self.main).configure(x=0, y=0, width=w, height=h)
         self.d.sync()
-        time.sleep(2.5)
+        time.sleep(1.5)
 
     def windows(self, popups=False):
         """As janelas visíveis do app, de baixo para cima. Dicas e menus (janelas temporárias, sem
@@ -160,7 +166,7 @@ class Owlio:
 
     def _code(self, name):
         alias = {'ctrl': 'Control_L', 'shift': 'Shift_L', 'enter': 'Return', 'esc': 'Escape', ',': 'comma',
-                 'space': 'space', 'up': 'Up', 'end': 'End'}
+                 'space': 'space', 'up': 'Up', 'end': 'End', 'home': 'Home'}
         return self.d.keysym_to_keycode(XK.string_to_keysym(alias.get(name.lower(), name)))
 
     def key(self, combo, wait=0.35):
@@ -198,9 +204,23 @@ class Owlio:
             time.sleep(0.2)
         time.sleep(0.9)
 
-    def wait_windows(self, count):
+    def close_dialog(self, cancel, count):
+        """Fecha o diálogo de cima pelo Cancelar e espera o app ficar com `count` janelas. Às vezes o
+        clique chega antes de o diálogo estar pronto: tenta de novo, e por fim com Esc."""
+        for attempt in range(3):
+            if attempt == 2:
+                self.key('esc', 0.4)
+            else:
+                self.click(*cancel, inside=self.top())
+            try:
+                return self.wait_windows(count, tries=15)
+            except RuntimeError:
+                continue
+        self.wait_windows(count)
+
+    def wait_windows(self, count, tries=40):
         """Espera até o app ter só `count` janelas abertas (os diálogos fecham com algum atraso)."""
-        for _ in range(40):
+        for _ in range(tries):
             if len(self.windows()) <= count:
                 time.sleep(0.3)
                 return
@@ -247,7 +267,6 @@ def run(exe, app, lang, theme, out):
     o = Owlio(exe, base, script)
     shots = {}
     try:
-        shots['script'] = o.grab()
         for name, combo in (('cards', 'ctrl+shift+c'), ('beat-board', 'ctrl+shift+b'),
                             ('relations', 'ctrl+shift+m'), ('timeline', 'ctrl+shift+l')):
             o.key(combo, 1.6)
@@ -259,12 +278,11 @@ def run(exe, app, lang, theme, out):
         o.key('F1'); o.wait_dialog(); shots['shortcuts'] = o.grab(o.top()); o.key('esc', 1.0)
         o.key('ctrl+,'); o.wait_dialog(); o.click(67, 152, inside=o.top()); shots['settings'] = o.grab(o.top()); o.key('esc', 1.0)
         o.key('ctrl+p'); o.wait_dialog(); shots['print'] = o.grab(o.top()); o.key('esc', 1.0)
-        o.click(239, 512); o.wait_dialog(); shots['cast'] = o.grab(o.top()); o.key('esc', 1.0)
         o.click(90, 586, times=2); o.wait_dialog(); shots['character'] = o.grab(o.top())
         o.click(241, 208, inside=o.top()); time.sleep(1.5); shots['avatar'] = o.grab(o.top())
         # O criador de avatar não fecha com Esc: Cancelar nele e depois na ficha.
-        o.click(*CANCEL['avatar'], inside=o.top()); o.wait_windows(2)
-        o.click(*CANCEL['character'], inside=o.top()); o.wait_windows(1)
+        o.close_dialog(CANCEL['avatar'], 2)
+        o.close_dialog(CANCEL['character'], 1)
         before = o.grab()
         o.click(720, 72); time.sleep(0.6); shots['elements'] = o.grab_popups(before); o.key('esc', 0.6)
         o.key('ctrl+shift+f', 1.2); shots['focus'] = o.grab(); o.key('ctrl+shift+f', 1.0)
@@ -283,6 +301,11 @@ def run(exe, app, lang, theme, out):
         time.sleep(0.6)
         shots['script-end'] = o.grab()
         o.click(*DUAL_AT[lang]); o.key('ctrl+shift+d', 1.0); shots['dual'] = o.grab(); o.key('ctrl+z', 0.6)
+        # Por último o topo: o início do roteiro com a janela em pé. Fica para o fim porque mudar o
+        # tamanho da janela rearruma a barra lateral e deslocaria os cliques acima.
+        o.key('ctrl+home', 0.6); o.resize(*HERO)
+        o.click(HERO[0] // 2, HERO[1] // 2, times=15, button=4)   # roda do mouse para cima: o topo do papel
+        shots['hero'] = o.grab()
     finally:
         o.quit()
         shutil.rmtree(base / 'data/Owlio/Owlio/recovery', ignore_errors=True)
@@ -310,7 +333,7 @@ def main():
     exe = app / 'build/owlio'
     if not exe.exists():
         sys.exit(f'não achei {exe}: compile o Owlio antes (cmake --build build)')
-    xephyr = subprocess.Popen(['Xephyr', SCREEN, '-screen', f'{W}x{H}', '-title', 'Owlio (capturas do site)', '-no-host-grab'],
+    xephyr = subprocess.Popen(['Xephyr', SCREEN, '-screen', f'{max(W, HERO[0])}x{max(H, HERO[1])}', '-title', 'Owlio (capturas do site)', '-no-host-grab'],
                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(2)
     try:
